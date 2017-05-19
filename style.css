@@ -1,0 +1,27 @@
+body {
+  background: gray;
+
+}
+div {
+  margin: 0 auto;
+  text-align: center;
+}
+.row {
+  width: 350px;
+
+}
+
+.box {
+background: white;
+width: 75px;
+height: 75px;
+border: 1px solid black;
+display: inline-block;
+margin-left: -4px;
+}
+.black {
+  background:black;
+}
+.yellow {
+  background: yellow;
+}
