@@ -6,11 +6,13 @@ div {
   margin: 0 auto;
   text-align: center;
 }
-.row {
+/*.row {
   width: 350px;
 
+}*/
+.game {
+  width: 310px;
 }
-
 .box {
 background: white;
 width: 75px;
@@ -20,8 +22,11 @@ display: inline-block;
 margin-left: -4px;
 }
 .black {
-  background:black;
+  background:gray;
 }
 .yellow {
   background: yellow;
+}
+.blue {
+  background: blue;
 }
