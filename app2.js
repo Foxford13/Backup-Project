@@ -6,30 +6,27 @@ $(() => {
 
 
 
+  function fillBoxes(e, classToAdd, classToRemove, boxNumbers) {
+    let index = $(e.target).index();
+    const emptyBoxes = (!($(e.target).hasClass(classToRemove)) && !($(e.target).hasClass(classToAdd)));
 
-  $(() => {
-    // $boxes.on('click', alternateMatches);
-    $('.box').each(function(i) {  //////// adds numbers to each box
-      $(this).text(i);
-    });
+    while ($boxes.eq(index + boxNumbers).hasClass(classToRemove) && emptyBoxes && ($boxes.eq(index + boxNumbers).hasClass(classToAdd))) {
+      $(e.target).addClass(classToAdd);
+      $('body').find($boxes).eq(index + boxNumbers).removeClass(classToRemove).addClass(classToAdd);
+      $(e.target).addClass(classToAdd);
+      index += boxNumbers;
+    }
+  }
 
-    $boxes.on('click', (e) => {
-      let index = $(e.target).index();
-      //
-      index += 1;
-      //
-      // var hasBlack = $(e.target).hasClass('black');
-      // var hasYellow = $(e.target).hasClass('yellow');
-      //
-      // console.log(hasBlack);
-      // console.log(index);
-
-      console.log(index);
-
-
-      console.log(document.querySelectorAll('.black'));
-
-
-    });
+  // $boxes.on('click', alternateMatches);
+  $('.box').each(function(i) {  //////// adds numbers to each box
+    $(this).text(i);
   });
+
+  $boxes.on('click', (e) => {
+    fillBoxes(e, 'yellow', 'black', +8);
+    fillBoxes(e, 'black', 'yellow', +8);
+  });
+
+
 });
