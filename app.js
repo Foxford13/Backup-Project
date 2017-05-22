@@ -28,7 +28,7 @@ $(() => {
 
       index += boxNumbers;
       playerOnePlaying = classToAdd === 'black' ? false : true;
-      const player = playerOnePlaying ? 'Player 1 - Grey' : 'Player 2 - Yellow';
+      const player = playerOnePlaying ? $isPlaying.text('Player 1 - Grey') : $isPlaying.text('Player 2 - Yellow');
       $isPlaying.text(player);
       squaresToTurn.push(crazyBoxes);
       console.log(squaresToTurn);
