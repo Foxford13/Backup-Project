@@ -21,7 +21,8 @@ $(() => {
     const crazyBoxes =  ($boxes.eq(index + boxNumbers).hasClass(classToAdd)) ||($boxes.eq(index + boxNumbers + boxNumbers).hasClass(classToAdd)) ||  ($boxes.eq(index + boxNumbers + boxNumbers + boxNumbers).hasClass(classToAdd)) ||  ($boxes.eq(index + boxNumbers + boxNumbers + boxNumbers + boxNumbers).hasClass(classToAdd)) || ($boxes.eq(index + boxNumbers + boxNumbers + boxNumbers + boxNumbers + boxNumbers).hasClass(classToAdd)) || ($boxes.eq(index + boxNumbers + boxNumbers + boxNumbers + boxNumbers + boxNumbers + boxNumbers).hasClass(classToAdd));
 
     ///// a crazy ass bolean which i think will screw me over eventually (next )
-    while ($boxes.eq(index + boxNumbers).hasClass(classToRemove) && crazyBoxes ) {
+    let squaresToTurn = [];
+    while ($boxes.eq(index + boxNumbers).hasClass(classToRemove) && crazyBoxes && crazyBoxes >= 0 && crazyBoxes <= 63) {
       $(e.target).addClass(classToAdd);
       $('body').find($boxes).eq(index + boxNumbers).removeClass(classToRemove).addClass(classToAdd);
 
@@ -29,6 +30,8 @@ $(() => {
       playerOnePlaying = classToAdd === 'black' ? false : true;
       const player = playerOnePlaying ? 'Player 1 - Grey' : 'Player 2 - Yellow';
       $isPlaying.text(player);
+      squaresToTurn.push(crazyBoxes);
+      console.log(squaresToTurn);
 
     }
 
