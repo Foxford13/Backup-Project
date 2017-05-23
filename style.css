@@ -6,10 +6,7 @@ div {
   margin: 0 auto;
   text-align: center;
 }
-/*.row {
-width: 350px;
 
-}*/
 .game {
 
   width: 620px;
@@ -29,6 +26,16 @@ width: 350px;
   display: inline-block;
 
 }
+.score-one, .score-two {
+  height: 80px;
+  width: 120px;
+  font-size: 40px;
+
+
+}
+
+
+
 
 .black {
   background-image:url('https://img.clipartfest.com/7ed346098a4b935bff5c0736407db373_yellow-circle-icon-clip-art-clipart-yellow-circle_300-300.png');

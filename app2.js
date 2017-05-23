@@ -1,130 +1,92 @@
 $(() => {
-
-
-
   const $isPlaying = $('.current');
   let playerOnePlaying = true;
   const boardSize = 64;
   $isPlaying.text('Player 1 - Grey');
-
+  const $scoreOne = $('.score-one');
+  const $scoreTwo = $('.score-two');
+  const $game = $('.game');
+  let $boxes = null;
 
   function startingPosition () {
 
     for ( let i = 0; i < boardSize; i++) {
-      $('.game').append($('<div>').addClass('box'));
+      $game.append($('<div>').addClass('box'));
     }
-    $('.box').each(function(i) {  //////// adds numbers to each box
+
+    $boxes = $('.box');
+    $boxes.each(function(i) {  //////// adds numbers to each box
       $(this).text(i);
     });
-    $('body').find($('.box')).eq(27).addClass('black');
-    $('body').find($('.box')).eq(28).addClass('yellow');
-    $('body').find($('.box')).eq(35).addClass('yellow');
-    $('body').find($('.box')).eq(36).addClass('black');
 
+    $boxes.eq(27).addClass('black');
+    $boxes.eq(28).addClass('yellow');
+    $boxes.eq(35).addClass('yellow');
+    $boxes.eq(36).addClass('black');
   }
+
+
   startingPosition();
 
-  const $boxes = $('.box');
+
+  function fillBoxes(e, classToAdd, classToRemove, boxNumber) {
+    const $square = $(e.target);
 
 
 
-
-  function fillBoxes(e, classToAdd, classToRemove, boxNumbers) {
-    const index = $(e.target).index();
+    const index = $square.index();
     const squaresToTurn = [];
-    let i = boxNumbers;
+    let i = boxNumber;
     ///////////////////// it determines the the color  of boxes based on possible coordinates given and
     ///////////////////// puts them into an array ex. for forward  can  have 4 yellow squares ahead(+1 )
     ////////////////////    or for diaganal up     three yellows -7 while they are still there
-    while ($boxes.eq(index + i).hasClass(classToRemove)) {
+    ///////////////////////// they dont turn up and down when enar the borders
+    while ($boxes.eq(index + i).hasClass(classToRemove) && ((index + i)%8 !== 7 && (index + i)%8 !== 7)) {
       squaresToTurn.push(index + i);
-      i += boxNumbers;
+      i += boxNumber;
     }
+
+    console.log(squaresToTurn);
+
     ////////////  establishes a class of a checker after the sequence of checkers that have a class we want to
     // remove
-    const lastFilledDivInASequence = squaresToTurn[squaresToTurn.length - 1] + boxNumbers;
-    console.log(lastFilledDivInASequence);
-
+    const lastFilledDivInASequence = squaresToTurn[squaresToTurn.length - 1] + boxNumber;
     //////////// if
 
-    if ( $boxes.eq(lastFilledDivInASequence).hasClass(classToAdd) && lastFilledDivInASequence >= 0 && lastFilledDivInASequence <= 63) {
+
+    if ($boxes.eq(lastFilledDivInASequence).hasClass(classToAdd) && lastFilledDivInASequence >= 0 && lastFilledDivInASequence <= 63) {
 
 
       for (let i = 0; i < squaresToTurn.length; i++) {
-        $(e.target).addClass(classToAdd);
+        $square.addClass(classToAdd);
         $('body').find($boxes).eq(squaresToTurn[i]).removeClass(classToRemove).addClass(classToAdd);
 
         playerOnePlaying = classToAdd === 'black' ? false : true;
         playerOnePlaying ? $isPlaying.text('Player 1 - Grey') : $isPlaying.text('Player 2 - Yellow');
       }
     }
+
+
   }
 
-  $boxes.on('click', (e) => {
-    const $indexTarget = $(e.target).index();
-    console.log($(e.target).index());
+  function turn(e) {
 
-    function blackPlus() {
-      if (playerOnePlaying && !($indexTarget % 8 === 7)) {
-        fillBoxes(e, 'black', 'yellow', +1);
-        fillBoxes(e, 'black', 'yellow', +8);
-        fillBoxes(e, 'black', 'yellow', +9);
-        fillBoxes(e, 'black', 'yellow', +7);
-      }
-    }
-    blackPlus();
-    function blackMinus() {
-      if (playerOnePlaying && !($indexTarget % 8 === 0)){
-        fillBoxes(e, 'black', 'yellow', -1);
-        fillBoxes(e, 'black', 'yellow', -8);
-        fillBoxes(e, 'black', 'yellow', -9);
-        fillBoxes(e, 'black', 'yellow', -7);
-      }
-    }
-    blackMinus();
-    function yellowPlus() {
-      if (!playerOnePlaying && !($indexTarget % 8 === 7)){
-        fillBoxes(e, 'yellow', 'black', +1);
-        fillBoxes(e, 'yellow', 'black', +8);
-        fillBoxes(e, 'yellow', 'black', +9);
-        fillBoxes(e, 'yellow', 'black', +7);
-      }
-    }
-    yellowPlus();
-    function yellowMinus() {
-      if (!playerOnePlaying && !($indexTarget % 8 === 0)){
-        fillBoxes(e, 'yellow', 'black', -1);
-        fillBoxes(e, 'yellow', 'black', -8);
-        fillBoxes(e, 'yellow', 'black', -9);
-        fillBoxes(e, 'yellow', 'black', -7);
-      }
-    }
-    yellowMinus();
+    const classToAdd = playerOnePlaying ? 'black' : 'yellow';
+    const classToRemove = playerOnePlaying ? 'yellow' : 'black';
+    if ($(e.target).hasClass(classToAdd)  || $(e.target).hasClass(classToRemove)) return false;////before it was in fillBoxes function. Had to place it here so it determines not to run a function fillBoxes instead of trying to run it and getting an error mid way checking of the availables square
 
+    [1,8,9,7].forEach((number) => {
+      fillBoxes(e, classToAdd, classToRemove, number);
+    });
 
-  });
+    [-1,-8,-9,-7].forEach((number) => {
+      fillBoxes(e, classToAdd, classToRemove, number);
+    });
 
+    $scoreOne.text($('.black').length);
+    $scoreTwo.text($('.yellow').length);
+  }
 
-
-
-
-
-
-
-
-
-  // function fillBoxesBlack(e, classToRemove, boxNumbers) {
-  //   const index = $(e.target).index();
-  //   let squaresToTurn = [];
-  //   while ($boxes.eq(index + boxNumbers).hasClass(classToRemove)) {
-  //     squaresToTurn.push(boxNumbers);
-  //     console.log(squaresToTurn);
-  //
-  //   }
-  // }
-
-
-
-
+  $boxes.on('click', turn);
 
 });
