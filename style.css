@@ -6,51 +6,63 @@ div {
   margin: 0 auto;
   text-align: center;
 }
+footer {
+  height: 150px;
+}
 
 .game {
-
+  clear: both;
   width: 620px;
   height: 620px;
-  background-image: url('http://www.fun-free-party-games.com/downloads/Game-Board-8x8-grid(Green)(Reversi).gif');
+  background-image: url('https://s-media-cache-ak0.pinimg.com/736x/a9/00/8d/a9008d0447093d351da6781b660e227f.jpg');
 
   background-size:cover;
+  padding-top: -4px;
 
 }
 .current {
   margin-bottom: 10px;
+
+
 }
+
 .box {
   width: 75px;
   height: 75px;
-  border: 1px solid black;
-  display: inline-block;
-
-}
-.score-one, .score-two {
-  height: 80px;
-  width: 120px;
-  font-size: 40px;
-
+  border: 1px solid grey;
+  float: left;
 
 }
 
+.results {
+width: 100%;
+  margin: 0 auto;
+  height: 50px;
+  width: 300px;
+font-size: 25px;
+  overflow: hidden;
+}
+.score-one {
+margin: 0 auto;
+
+}
+.score-two {
+color: yellow;
+}
 
 
 
 .black {
-  background-image:url('https://img.clipartfest.com/7ed346098a4b935bff5c0736407db373_yellow-circle-icon-clip-art-clipart-yellow-circle_300-300.png');
-    background-image:url('https://i.stack.imgur.com/ma4sx.png');
-  background-repeat-x: no-repeat;
-  background-repeat-y: no-repeat;
+  background-image:url('https://img.clipartfest.com/597b86bad528e68246fb09ab4ef54b9a_smiley-face-transparent-face-clipart-transparent-background_2040-2040.png');
+
   background-size:100%;
 }
-.yellow {
+.white {
 
-  background-image:url('https://img.clipartfest.com/7ed346098a4b935bff5c0736407db373_yellow-circle-icon-clip-art-clipart-yellow-circle_300-300.png');
-  background-repeat-x: no-repeat;
-  background-repeat-y: no-repeat;
+  background-image:url('https://img.clipartfest.com/ef90ee323453b75048afcedff50e705b_smiley-face-transparent-emoji-happy-face-clipart-transparent-background_500-499.gif');
 
-  background-size:100%;
+
+  background-size:101%;
 
 }
 .blue {
